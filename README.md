@@ -53,7 +53,7 @@ python SCROPT/scripts/scropt.py -objective rd -budget 600 -hrprop 1 -landscape t
 ```
 In short, this command creates an SCRoptProblem instance, which is an integer linear program for maximizing, in this case, realized density with a budget of 600 pixels for the true, high fragmentation landscape with resistance parameter alpha2 = 2.25 and population N = 100. This ILP is formulated using `pulp` and solved using CPLEX, and the results are stored in `SCROPT/output/results/budget/tru_high_N100_a2225_rd_600.0.txt`.
 
-We can also visualize the conserved pixels in this solution. Suppose your `SCROPT/scripts/generateFigures.py` looks like this:
+We can also visualize the conserved pixels in this solution using the `visualize` module in `scropt`. Suppose your `SCROPT/scripts/generateFigures.py` looks like this:
 ```python
 #!/usr/bin/python
 import matplotlib.pyplot as plt
@@ -62,3 +62,4 @@ import visualize
 
 visualize.optimalreserve('tru_high_N100_a2225', 600, 'rd')
 ```
+![optional caption text](other/figures/rd_600_tru_high_N100_a2225.png)
