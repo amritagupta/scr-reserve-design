@@ -2,6 +2,7 @@
 **S**patial **C**apture-recapture **R**eserve **OPT**imization. Wildlife reserve design based on conservation objectives derived from spatial capture-recapture models. Reserve design optimization is formulated as an integer linear program and solved using the CPLEX optimization software package. The optimization problem can set either realized density, potential connectivity, or density-weighted connectivity as the objective to be maximized over the reserve, and is subject to a hard budget constraint. The problem can also be solved with additional home range constraints specifying that only individuals whose full 95% home range (as estimated by spatial capture-recapture) is within the reserve can be considered protected.
 
 **Cite As:**
+
 Gupta, A., Dilkina, B., Morin, D.J., Fuller, A., Royle, J.A., Sutherland, C., and Gomes, C. `Optimizing Functional Connectivity and Density in Protected Areas using Spatial Capture-Recapture Based Conservation Objectives'. Under review.
 
 ## Setup
@@ -29,7 +30,7 @@ All scripts were written and tested with Python 2.7.6. Make sure you have the fo
 * [rasterio](https://pypi.python.org/pypi/rasterio)
 * [pulp](https://pypi.python.org/pypi/PuLP)
 
-Additionally, you will need to have access to the IBM ILOG CPLEX Optimization solver if you wish to run the optimizations yourself.
+Additionally, you will need to have access to the [IBM ILOG CPLEX Optimization solver](https://www.ibm.com/analytics/cplex-optimizer) to run the optimizations yourself.
 
 ## Example
 Here's an example of how to run reserve design experiments using `scropt`. Suppose your `SCROPT/scripts/SCRoptRun.py` looks like this:
