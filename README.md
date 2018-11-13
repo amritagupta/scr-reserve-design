@@ -1,6 +1,8 @@
 # scropt
-TEST TEST **S**patial **C**apture-recapture **R**eserve **OPT**imization. Wildlife reserve design based on conservation objectives derived from spatial capture-recapture models.
+**S**patial **C**apture-recapture **R**eserve **OPT**imization. Wildlife reserve design based on conservation objectives derived from spatial capture-recapture models. Reserve design optimization is formulated as an integer linear program and solved using the CPLEX optimization software package. The optimization problem can set either realized density, potential connectivity, or density-weighted connectivity as the objective to be maximized over the reserve, and is subject to a hard budget constraint. The problem can also be solved with additional home range constraints specifying that only individuals whose full 95% home range (as estimated by spatial capture-recapture) is within the reserve can be considered protected.
 
+**Cite As:**
+Gupta, A., Dilkina, B., Morin, D.J., Fuller, A., Royle, J.A., Sutherland, C., and Gomes, C. `Optimizing Functional Connectivity and Density in Protected Areas using Spatial Capture-Recapture Based Conservation Objectives'. Under review.
 
 ## Setup
 
@@ -63,3 +65,7 @@ import visualize
 visualize.optimalreserve('tru_high_N100_a2225', 600, 'rd')
 ```
 ![optional caption text](other/figures/rd_600_tru_high_N100_a2225.png)
+
+## Cite As
+Gupta, A., Dilkina, B., Morin, D.J., Fuller, A., Royle, J.A., Sutherland, C., and Gomes, C. `Optimizing Functional Connectivity and Density in Protected Areas using Spatial Capture-Recapture Based Conservation Objectives'. Under review.
+
