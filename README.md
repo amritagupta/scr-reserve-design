@@ -52,9 +52,9 @@ experiment.submitjobs(jobsdir)
 ```
 The jobfile written to `JOBS/tru_high_N100_a2225_rd` as a result of running `SCROPT/scripts/SCRoptRun.py` has one problem (corresponding to one budget value) per line, for example:
 ```
-python SCROPT/scripts/scropt.py -objective rd -budget 600 -hrprop 1 -landscape tru_high_N100_a2225 -method cplex
+python SCROPT/scripts/scropt.py -objective rd -budget 600 -hrprop 1 -landscape est_high_N100_a2225 -method cplex
 ```
-In short, this command creates an SCRoptProblem instance, which is an integer linear program for maximizing, in this case, realized density with a budget of 600 pixels for the true, high fragmentation landscape with resistance parameter alpha2 = 2.25 and population N = 100. This ILP is formulated using `pulp` and solved using CPLEX, and the results are stored in `SCROPT/output/results/budget/tru_high_N100_a2225_rd_600.0.txt`.
+In short, this command creates an SCRoptProblem instance, which is an integer linear program for maximizing, in this case, protected realized density with a budget of 600 pixels for the estimated high fragmentation landscape with resistance parameter alpha2 = 2.25 and population N = 100. The `-hprop 1` argument specifes that home range constraints should be included. (To exclude home range constraints, set `-hprop 0`.) This ILP is encoded using `pulp` and solved using CPLEX, and the results are stored in `SCROPT/output/results/budget/est_high_N100_a2225_rd_600.0.txt`.
 
 We can also visualize the conserved pixels in this solution using the `visualize` module in `scropt`. Suppose your `SCROPT/scripts/generateFigures.py` looks like this:
 ```python
@@ -63,10 +63,7 @@ import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 import visualize
 
-visualize.optimalreserve('tru_high_N100_a2225', 600, 'rd')
+visualize.optimalreserve('est_high_N100_a2225', 600, 'rd')
 ```
 ![optional caption text](other/figures/rd_600_tru_high_N100_a2225.png)
-
-## Cite As
-Gupta, A., Dilkina, B., Morin, D.J., Fuller, A., Royle, J.A., Sutherland, C., and Gomes, C. `Optimizing Functional Connectivity and Density in Protected Areas using Spatial Capture-Recapture Based Conservation Objectives'. Under review.
 
