@@ -2,6 +2,11 @@
 import argparse
 import SCRoptProblem
 
+MYCPLEXPATH = '/opt/ibm/ILOG/CPLEX_Studio126/cplex/bin/x86-64_linux/cplex'
+MYLOGFILEDIR = '/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/logfiles/'
+MYRESULTFILEDIR = '/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/results/'
+MYWORKDIR = '/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/lpandsolfiles/'
+
 def main():
 	"""This is the command-line facing driver for working with SCRoptProblem. The script takes command line arguments (which can come from a batch script),
 	parses them, checks them, and then supplies them to a create a single LP. The LP is then solved using cplex (currently this is the only option for solving).
@@ -47,10 +52,10 @@ def main():
 	# create and solve an SCRoptExperiment.Problem
 	if secondary:
 		problem = SCRoptProblem.ParetoProblem(objective, budget, hrprop, landscape, method, secondary, sconstrval)
-		runtimeparams = {'cplexpath':'/opt/ibm/ILOG/CPLEX_Studio126/cplex/bin/x86-64_linux/cplex', 'timelimit': 432000, 'randomseed': 15, 'workmem': 20000, 'logfiledir':'/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/logfiles/', 'logfilename':'/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/logfiles/'+landscape+'_'+objective+'_'+str(budget)+'_pareto_'+secondary+'_'+str(sconstrval)+'.log', 'resultfilename': '/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/results/pareto/'+landscape+'_'+objective+'_'+str(budget)+'_'+secondary+'_'+str(sconstrval)+'.txt', 'workdir': '/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/lpandsolfiles/'}
+		runtimeparams = {'cplexpath': MYCPLEXPATH, 'timelimit': 432000, 'randomseed': 15, 'workmem': 20000, 'logfiledir': MYLOGFILEDIR, 'logfilename':MYLOGFILEDIR+landscape+'_'+objective+'_'+str(budget)+'_pareto_'+secondary+'_'+str(sconstrval)+'.log', 'resultfilename': MYRESULTFILEDIR+'pareto/'+landscape+'_'+objective+'_'+str(budget)+'_'+secondary+'_'+str(sconstrval)+'.txt', 'workdir': MYWORKDIR}
 	else:
 		problem = SCRoptProblem.Problem(objective, budget, hrprop, landscape, method)
-		runtimeparams = {'cplexpath':'/opt/ibm/ILOG/CPLEX_Studio126/cplex/bin/x86-64_linux/cplex', 'timelimit': 432000, 'randomseed': 15, 'workmem': 20000, 'logfiledir':'/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/logfiles/', 'logfilename':'/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/logfiles/'+landscape+'_'+objective+'_'+str(budget)+'.log', 'resultfilename': '/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/results/budget/'+landscape+'_'+objective+'_'+str(budget)+'.txt', 'workdir': '/home/fs01/ag2373/LandscapeConnectivity/SCROPT/output/lpandsolfiles/'}
+		runtimeparams = {'cplexpath': MYCPLEXPATH, 'timelimit': 432000, 'randomseed': 15, 'workmem': 20000, 'logfiledir': MYLOGFILEDIR, 'logfilename': MYLOGFILEDIR+landscape+'_'+objective+'_'+str(budget)+'.log', 'resultfilename': MYRESULTFILEDIR+'budget/'+landscape+'_'+objective+'_'+str(budget)+'.txt', 'workdir': MYWORKDIR}
 	if not all (k in runtimeparams.keys() for k in ('cplexpath', 'timelimit', 'randomseed', 'workmem', 'logfiledir', 'logfilename', 'resultfilename', 'workdir')):
 		raise ValueError("One or more runtimeparams missing. Need to provide:\ncplexpath\ntimelimit\nrandomseed\nworkmem\nlogfiledir\nlogfilename\nresultfilename\nworkdir.")
 	problem.runcplex(runtimeparams)
