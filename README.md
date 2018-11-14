@@ -23,6 +23,7 @@ SCROPT/
   scripts/
 singlejob_33
 ```
+You will also need to specify the paths to your CPLEX installation (see Dependencies below) and the paths to some of the above directories at the top of `scripts/scropt.py`.
 ## Dependencies
 All scripts were written and tested with Python 2.7.6. Make sure you have the following python packages installed:
 * numpy
