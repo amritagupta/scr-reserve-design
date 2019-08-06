@@ -1,13 +1,24 @@
-# scropt
-**S**patial **C**apture-recapture **R**eserve **OPT**imization. Wildlife reserve design based on conservation objectives derived from spatial capture-recapture models. Reserve design optimization is formulated as an integer linear program and solved using the CPLEX optimization software package. The optimization problem can set either realized density, potential connectivity, or density-weighted connectivity as the objective to be maximized over the reserve, and is subject to a hard budget constraint. The problem can also be solved with additional home range constraints specifying that only individuals whose full 95% home range (as estimated by spatial capture-recapture) is within the reserve can be considered protected.
+scr-reserve-design
+==================
+Wildlife reserve design based on optimizing conservation objectives derived from spatial capture-recapture models.
 
-**Cite As:**
+* **Citation Info:** Gupta, A. , Dilkina, B. , Morin, D. J., Fuller, A. K., Royle, J. A., Sutherland, C. and Gomes, C. P. (2019), Reserve design to optimize functional connectivity and animal density. *Conservation Biology*. [doi:10.1111/cobi.13369](https://dx.doi.org/10.1111/cobi.13369)
 
-Gupta, A., Dilkina, B., Morin, D.J., Fuller, A., Royle, J.A., Sutherland, C., and Gomes, C. `Optimizing Functional Connectivity and Density in Protected Areas using Spatial Capture-Recapture Based Conservation Objectives'. Under review.
+--------
+Overview
+--------
+Reserve design is formulated as an integer linear program and solved using the CPLEX optimization software package. The optimization problem can use either realized density, potential connectivity, or density-weighted connectivity as the objective to be maximized over the reserve, subject to a hard budget constraint on purchased land parcels. The problem can also be solved with additional home range constraints specifying that only individuals whose full 95% home range (as estimated by spatial capture-recapture) is within the reserve can be considered protected.
 
-## Setup
+-----
+Setup
+-----
+**Dependencies**
+* [IBM ILOG CPLEX Optimization solver](https://www.ibm.com/analytics/cplex-optimizer)
+* [pulp](https://pypi.python.org/pypi/PuLP)
+* numpy
+* [rasterio](https://pypi.python.org/pypi/rasterio)
 
-This implementation of `scropt` is written for and tested on a Linux cluster (running Rocks 6.1 and Centos 6.3), and relies on the following directory structure:
+All code was written for and tested on a Linux cluster (running Rocks 6.1 and Centos 6.3), and relies on the following directory structure:
 ```
 batchQsub.sh
 JOBS/
