@@ -19,8 +19,6 @@ def main():
 	parser.add_argument("-hrprop", type=float, required=True, help="If hrprop<=1 : minimum proportion of 95%% home range that must be conserved. If q>1 : minimum number of pixels in 95%% home range that must be conserved.")
 	parser.add_argument("-landscape", type=str, required=True, help="Which landscape surface to use for the problem")
 	parser.add_argument("-method", type=str, default="cplex", required=True, help="Which method to use to solve the problem. Default is cplex.")
-	parser.add_argument("-secondary", type=str, required=False, help="Secondary objective function for pareto frontier experiment constraint.")
-	parser.add_argument("-sconstrval", type=float, required=False, help="Minimum value for secondary objective in pareto frontier experiment.")
 	# parser.add_argument("-runtimeparams", type = json.loads, required=True, help="Runtime parameters for cplex.")
 	arguments = parser.parse_args()
 	objective = arguments.objective
@@ -50,13 +48,10 @@ def main():
 		print("Arguments parsed: objective=%s, budget=%s, hrprop=%s, landscape=%s, method=%s") %(objective, budget, hrprop, landscape, method)
 
 	# create and solve an SCRoptExperiment.Problem
-	if secondary:
-		problem = SCRoptProblem.ParetoProblem(objective, budget, hrprop, landscape, method, secondary, sconstrval)
-		runtimeparams = {'cplexpath': MYCPLEXPATH, 'timelimit': 432000, 'randomseed': 15, 'workmem': 20000, 'logfiledir': MYLOGFILEDIR, 'logfilename':MYLOGFILEDIR+landscape+'_'+objective+'_'+str(budget)+'_pareto_'+secondary+'_'+str(sconstrval)+'.log', 'resultfilename': MYRESULTFILEDIR+'pareto/'+landscape+'_'+objective+'_'+str(budget)+'_'+secondary+'_'+str(sconstrval)+'.txt', 'workdir': MYWORKDIR}
-	else:
-		problem = SCRoptProblem.Problem(objective, budget, hrprop, landscape, method)
-		runtimeparams = {'cplexpath': MYCPLEXPATH, 'timelimit': 432000, 'randomseed': 15, 'workmem': 20000, 'logfiledir': MYLOGFILEDIR, 'logfilename': MYLOGFILEDIR+landscape+'_'+objective+'_'+str(budget)+'.log', 'resultfilename': MYRESULTFILEDIR+'budget/'+landscape+'_'+objective+'_'+str(budget)+'.txt', 'workdir': MYWORKDIR}
-	if not all (k in runtimeparams.keys() for k in ('cplexpath', 'timelimit', 'randomseed', 'workmem', 'logfiledir', 'logfilename', 'resultfilename', 'workdir')):
+	problem = SCRoptProblem.Problem(objective, budget, hrprop, landscape, method)
+	runtimeparams = {'cplexpath': MYCPLEXPATH, 'timelimit': 432000, 'randomseed': 15, 'workmem': 20000, 'logfiledir': MYLOGFILEDIR, 'logfilename': MYLOGFILEDIR+landscape+'_'+objective+'_'+str(budget)+'.log', 'resultfilename': MYRESULTFILEDIR+'budget/'+landscape+'_'+objective+'_'+str(budget)+'.txt', 'workdir': MYWORKDIR}
+	
+    if not all (k in runtimeparams.keys() for k in ('cplexpath', 'timelimit', 'randomseed', 'workmem', 'logfiledir', 'logfilename', 'resultfilename', 'workdir')):
 		raise ValueError("One or more runtimeparams missing. Need to provide:\ncplexpath\ntimelimit\nrandomseed\nworkmem\nlogfiledir\nlogfilename\nresultfilename\nworkdir.")
 	problem.runcplex(runtimeparams)
 
