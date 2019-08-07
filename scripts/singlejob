@@ -1,0 +1,11 @@
+#PBS -N hropt_job
+#PBS -q bigmem
+#PBS -l walltime=165:00:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=94gb
+#PBS -j oe
+#PBS -o ./OUTPUT/$PBS_JOBID
+
+
+cd $PBS_O_WORKDIR
+
