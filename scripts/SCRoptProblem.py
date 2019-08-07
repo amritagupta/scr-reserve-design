@@ -38,8 +38,8 @@ class Problem(object):
 		Populates self.landscape with the data needed to describe the problem
 		:return: returns nothing
 		"""
-		densityfilestring = "SCROPT/data/"+self.landscape['name']+"_densities.txt"
-		useprobfilestring = "SCROPT/data/"+self.landscape['name']+"_useprobs.txt"
+		densityfilestring = "../data/"+self.landscape['name']+"_densities.txt"
+		useprobfilestring = "../data/"+self.landscape['name']+"_useprobs.txt"
 		self.landscape['D'] = np.loadtxt(open(densityfilestring,"rb"), delimiter=" ")				# estimated realized density at each pixel
 		self.landscape['npixels'] = len(self.landscape['D'])										# number of pixels in the landscape
 		self.landscape['Pr'] = np.loadtxt(open(useprobfilestring,"rb"), delimiter=" ")				# probability individual centered at i uses pixel j
